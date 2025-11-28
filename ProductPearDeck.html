@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pear Deck | Interactive Lessons for Active Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Vibrant Palette */
+            --pd-hero-bg: #cbed47;
+            --pd-dark-green: #1a3c34;
+            --pd-lime: #dbe956;
+            --pd-lime-hover: #cddb4d;
+            --pd-yellow: #fdd835;
+            --pd-cream: #fcfbf7;
+            --pd-light-blue: #eef8fc;
+            --pd-footer: #1e2035;
+            --pd-text-dark: #1a1a1a;
+            --pd-gray: #555;
+            --white: #ffffff;
+            
+            /* Feature Colors */
+            --blob-blue: #b0eddf;
+            --blob-orange: #ff6b35;
+            --card-orange: #f36c32;
+            --card-blue: #4db0f9;
+            --card-yellow: #fccd3e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--pd-cream);
+            color: var(--pd-text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-lime {
+            background-color: var(--pd-lime);
+            color: var(--pd-dark-green);
+            border: 2px solid var(--pd-lime);
+        }
+        .btn-lime:hover { background-color: var(--pd-lime-hover); border-color: var(--pd-lime-hover); }
+
+        .btn-yellow {
+            background-color: var(--pd-yellow);
+            color: var(--pd-dark-green);
+            border: 2px solid var(--pd-text-dark);
+        }
+        .btn-yellow:hover { transform: translateY(-2px); }
+
+        .btn-white-outline {
+            background-color: var(--white);
+            color: var(--pd-text-dark);
+            border: 2px solid var(--pd-text-dark);
+        }
+        .btn-white-outline:hover { background-color: #f0f0f0; }
+
+        .btn-header-lime { background: var(--pd-hero-bg); border: 2px solid var(--pd-text-dark); padding: 6px 16px; font-size: 0.8rem; color: var(--pd-text-dark); }
+        .btn-header-outline { background: white; border: 2px solid var(--pd-text-dark); padding: 6px 16px; font-size: 0.8rem; color: var(--pd-text-dark); }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; color: var(--pd-dark-green); text-decoration: none; }
+        .logo img { height: 30px; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--pd-text-dark); font-size: 0.85rem; font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .login-link { font-weight: 700; color: var(--pd-text-dark); text-decoration: underline; font-size: 0.85rem; }
+
+        /* --- HERO SECTION (Vibrant Lime) --- */
+        .hero-vibrant {
+            background-color: var(--pd-hero-bg);
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .blob-dark-green { position: absolute; top: -50px; left: -50px; width: 300px; height: 300px; background-color: var(--pd-dark-green); border-radius: 50%; z-index: 1; }
+        .blob-blue { position: absolute; bottom: 50px; left: -50px; width: 200px; height: 200px; background-color: var(--blob-blue); border-radius: 50%; z-index: 1; }
+        .blob-orange { position: absolute; bottom: -100px; right: -50px; width: 300px; height: 300px; background-color: var(--blob-orange); border-radius: 50%; z-index: 1; }
+        
+        .hero-card-container {
+            position: relative; z-index: 2; background-color: var(--white);
+            border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); min-height: 550px;
+        }
+        .hero-text-side { padding: 60px 50px; display: flex; flex-direction: column; justify-content: center; }
+        .hero-logo-small { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; margin-bottom: 20px; color: var(--pd-text-dark); }
+        .hero-logo-small div { background:var(--pd-lime); width:30px; height:30px; border-radius:4px; }
+        .hero-text-side h1 { font-size: 3rem; line-height: 1.1; color: var(--pd-text-dark); margin-bottom: 25px; }
+        .hero-text-side p { font-size: 1rem; color: var(--pd-text-dark); margin-bottom: 40px; line-height: 1.6; }
+        
+        .btn-group-labels { display: grid; grid-template-columns: auto auto; gap: 20px; justify-content: start; margin-bottom: 5px; }
+        .btn-label { font-size: 0.85rem; font-weight: 700; color: var(--pd-text-dark); }
+        .hero-buttons { display: grid; grid-template-columns: auto auto; gap: 20px; justify-content: start; }
+        
+        .hero-img-side {
+            background-image: url('https://placehold.co/800x800/eef8fc/1a3c34?text=Girl+Raising+Hand');
+            background-size: cover; background-position: center; height: 100%;
+        }
+
+        /* --- Feature 1: Engagement --- */
+        .feature-section { padding: 100px 0; }
+        .feature-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 80px; align-items: center; }
+        
+        .man-img-wrapper { position: relative; display: flex; justify-content: center; }
+        .man-img {
+            width: 320px; height: 320px; border-radius: 50%;
+            background-image: url('https://placehold.co/400x400/333/fff?text=Man+Blue+Shirt');
+            background-size: cover; position: relative; z-index: 2;
+        }
+        .yellow-blob {
+            position: absolute; top: 20px; right: 20px; width: 320px; height: 320px;
+            background-color: var(--pd-yellow); border-radius: 50%; z-index: 1;
+        }
+        .float-card {
+            position: absolute; top: 60px; left: -20px; z-index: 3;
+            background: white; padding: 20px; border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 200px;
+        }
+
+        .feature-text h2 { font-size: 2.2rem; color: var(--pd-text-dark); margin-bottom: 20px; }
+        .feature-text p { margin-bottom: 30px; color: var(--pd-gray); font-size: 1.1rem; }
+        .check-list div { display: flex; gap: 15px; margin-bottom: 20px; }
+        .icon-box {
+            width: 24px; height: 24px; background: var(--pd-light-blue); color: #4a90e2;
+            border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .check-list h4 { font-size: 1rem; margin-bottom: 5px; font-weight: 700; }
+        .check-list p { font-size: 0.9rem; margin-bottom: 0; color: var(--pd-gray); }
+
+        /* --- Feature 2: Prep Time --- */
+        .prep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        
+        .prep-ui-bg {
+            background-color: var(--pd-dark-green); padding: 40px; border-radius: 20px;
+            position: relative; overflow: hidden;
+        }
+        .prep-ui-img {
+            width: 100%; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: rotate(-2deg); border: 4px solid white;
+        }
+
+        .badge-new { background: var(--pd-yellow); font-weight: 700; font-size: 0.75rem; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-bottom: 15px; }
+        .number-list div { display: flex; gap: 15px; margin-bottom: 25px; }
+        .num-circle {
+            width: 28px; height: 28px; background: var(--pd-light-blue); color: #4a90e2;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; font-size: 0.9rem;
+        }
+
+        /* --- Content Library (Blue) --- */
+        .library-section { background-color: var(--pd-light-blue); padding: 100px 0; }
+        .lib-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+        .lib-header h2 { font-size: 2.2rem; color: var(--pd-text-dark); max-width: 500px; }
+        
+        .lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .lib-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .lib-card-top { height: 120px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .bg-orange { background-color: var(--card-orange); }
+        .bg-blue { background-color: var(--card-blue); }
+        .bg-yellow { background-color: var(--card-yellow); }
+        
+        .lib-card-body { padding: 25px; }
+        .lib-card-body h4 { margin-bottom: 20px; font-size: 1.1rem; color: var(--pd-text-dark); min-height: 3rem; }
+        .lib-link { font-size: 0.9rem; font-weight: 700; text-decoration: none; color: var(--pd-text-dark); border-bottom: 2px solid #ddd; }
+
+        /* --- Integrations --- */
+        .integrations { padding: 80px 0; text-align: center; background-color: var(--pd-cream); }
+        .integrations h3 { font-size: 1.8rem; color: var(--pd-text-dark); margin-bottom: 40px; }
+        .logo-row { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+        .int-logo { width: 50px; height: 50px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #555; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        /* --- Personas (Dark Green) --- */
+        .personas { background-color: var(--pd-dark-green); padding: 100px 0; text-align: center; color: white; }
+        .personas h2 { font-size: 2.2rem; margin-bottom: 60px; }
+        
+        .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
+        
+        .persona-card {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px; padding: 50px 40px 40px; position: relative;
+        }
+        .persona-icon {
+            width: 50px; height: 50px; background: var(--pd-lime); border-radius: 50%;
+            position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; justify-content: center; color: var(--pd-dark-green);
+            border: 3px solid var(--pd-dark-green); font-size: 1.2rem;
+        }
+        .btn-full-lime {
+            display: block; width: 100%; background: var(--pd-lime); color: var(--pd-text-dark);
+            font-weight: 700; padding: 12px; border-radius: 30px; text-decoration: none; margin-top: 25px;
+        }
+
+        /* --- Testimonials --- */
+        .testimonials { padding: 100px 0; background-color: var(--pd-cream); text-align: center; }
+        .testimonials h2 { font-size: 2.2rem; color: var(--pd-text-dark); margin-bottom: 60px; }
+        
+        .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+        .testi-card { background: #fffdf8; border: 1px solid #eee; padding: 40px; border-radius: 12px; }
+        .quote-box { width: 35px; height: 35px; background: var(--pd-yellow); display: flex; align-items: center; justify-content: center; border-radius: 6px; margin-bottom: 20px; }
+        .testi-link { color: #4a90e2; font-weight: 700; text-decoration: none; }
+
+        /* --- Form Section --- */
+        .form-section { background-color: #fffbf0; padding: 100px 0; }
+        .form-container {
+            max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 80px;
+        }
+        .form-text h2 { font-size: 2.5rem; color: var(--pd-text-dark); margin-bottom: 20px; }
+        .form-text p { color: var(--pd-gray); margin-bottom: 40px; }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
+        .form-label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; }
+
+        /* --- Footer --- */
+        footer { background-color: var(--pd-footer); color: white; padding: 80px 0 30px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { opacity: 0.7; margin-bottom: 20px; font-weight: 500; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: white; opacity: 0.7; text-decoration: none; }
+        .newsletter input { padding: 10px; border-radius: 4px; border: none; margin-right: 5px; width: 60%; }
+
+        @media (max-width: 992px) {
+            .hero-card-container, .feature-grid, .prep-grid, .lib-grid, .persona-grid, .testi-grid, .form-container, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-img-side { height: 300px; order: -1; }
+            .nav-links { display: none; }
+            .lib-grid { margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-pear" style="color:var(--pd-lime);"></i> Pear Deck Learning
+                    <span style="font-size:0.7rem; font-weight:400; display:block; margin-left:5px;">by GoGuardian</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#">Solutions</a>
+                    <a href="#">Products</a>
+                    <a href="#">Why Pear Deck Learning?</a>
+                    <a href="#">Resources & Community</a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="nav-right">
+                    <a href="#" class="login-link">Student/Tutor log in</a>
+                    <button class="btn-header-lime">Sign Up</button>
+                    <button class="btn-header-outline">Log In</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-vibrant">
+        <div class="blob-dark-green"></div>
+        <div class="blob-blue"></div>
+        <div class="blob-orange"></div>
+
+        <div class="container">
+            <div class="hero-card-container">
+                <div class="hero-text-side">
+                    <div class="hero-logo-small">
+                        <div></div> Pear Deck
+                    </div>
+                    <h1>Interactive lessons for active learning.</h1>
+                    <p>Pear Deck is the teacher-favorite instructional tool that helps create and deliver interactive lessons on any topic as part of the Pear Deck Learning platform.</p>
+                    
+                    <div class="btn-group-labels">
+                        <span class="btn-label">Administrators:</span>
+                        <span class="btn-label">Educators:</span>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-yellow">Request a demo</a>
+                        <a href="#" class="btn btn-white-outline">Sign up for free</a>
+                    </div>
+                </div>
+
+                <div class="hero-img-side"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container feature-grid">
+            <div class="man-img-wrapper">
+                <div class="yellow-blob"></div>
+                <div class="man-img"></div>
+                <div class="float-card">
+                    <div style="font-size:0.7rem; font-weight:bold; margin-bottom:5px;">Social Studies Response</div>
+                    <div style="height:6px; background:#eee; width:100%; margin-bottom:8px; border-radius:3px;"></div>
+                    <div style="height:6px; background:#eee; width:70%; border-radius:3px;"></div>
+                </div>
+            </div>
+            <div class="feature-text">
+                <h2>Student engagement with real-time feedback</h2>
+                <p>Pear Deck brings your classroom to life with interactive assessments.</p>
+                <div class="check-list">
+                    <div>
+                        <div class="icon-box"><i class="fas fa-check"></i></div>
+                        <div>
+                            <h4>Foster active engagement and participation</h4>
+                            <p>Students can engage with the learning material and demonstrate their understanding.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="icon-box"><i class="fas fa-check"></i></div>
+                        <div>
+                            <h4>Give instant feedback right when needed</h4>
+                            <p>Teachers can see student answers in real time and adjust instruction on the fly.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-lime">Explore Pear Deck</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container prep-grid">
+            <div class="feature-text">
+                <div class="badge-new">NEW</div>
+                <h2>Hours of content without hours of prep</h2>
+                <p>Focus on students, not slides.</p>
+                <div class="number-list">
+                    <div>
+                        <div class="num-circle">1</div>
+                        <div>
+                            <h4>Instant lesson generation</h4>
+                            <p>Use AI to generate comprehensive, standards-aligned lessons in seconds.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="num-circle">2</div>
+                        <div>
+                            <h4>Content library</h4>
+                            <p>Browse thousands of ready-to-teach templates and lessons created by educators.</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-lime">Explore content</a>
+            </div>
+            <div class="prep-ui-bg">
+                <img src="https://placehold.co/600x400/ffffff/1a3c34?text=Content+Library+UI" class="prep-ui-img">
+            </div>
+        </div>
+    </section>
+
+    <section class="library-section">
+        <div class="container">
+            <div class="lib-header">
+                <h2>1000+ Math and ELA certified content lessons</h2>
+                <a href="#" class="btn btn-yellow" style="border:2px solid black;">Visit Content Orchard</a>
+            </div>
+            <div class="lib-grid">
+                <div class="lib-card">
+                    <div class="lib-card-top bg-orange"><i class="fas fa-book-open fa-3x" style="color:white;"></i></div>
+                    <div class="lib-card-body">
+                        <h4>Leveling up reading comprehension</h4>
+                        <a href="#" class="lib-link">View lessons</a>
+                    </div>
+                </div>
+                <div class="lib-card">
+                    <div class="lib-card-top bg-blue"><i class="fas fa-newspaper fa-3x" style="color:white;"></i></div>
+                    <div class="lib-card-body">
+                        <h4>Real World Current Events</h4>
+                        <a href="#" class="lib-link">View lessons</a>
+                    </div>
+                </div>
+                <div class="lib-card">
+                    <div class="lib-card-top bg-yellow"><i class="fas fa-globe fa-3x" style="color:white;"></i></div>
+                    <div class="lib-card-body">
+                        <h4>Primary Sources & Social Studies</h4>
+                        <a href="#" class="lib-link">View lessons</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="integrations">
+        <div class="container">
+            <h3>Seamless Integrations with your favorite tools</h3>
+            <div class="logo-row">
+                <div class="int-logo"><i class="fab fa-google"></i></div>
+                <div class="int-logo"><i class="fab fa-microsoft"></i></div>
+                <div class="int-logo"><i class="fas fa-chalkboard"></i></div>
+                <div class="int-logo"><i class="fas fa-book"></i></div>
+                <div class="int-logo"><i class="fas fa-id-card"></i></div>
+            </div>
+            <a href="#" class="btn btn-white-outline" style="color:var(--pd-text-dark); border-color:var(--pd-text-dark);">Explore integrations</a>
+        </div>
+    </section>
+
+    <section class="personas">
+        <div class="container">
+            <h2>You help students. We help you.</h2>
+            <div class="persona-grid">
+                <div class="persona-card">
+                    <div class="persona-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Educators</h3>
+                    <p>Deliver engaging instruction and get real-time insights.</p>
+                    <a href="#" class="btn-full-lime">Learn more</a>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-icon"><i class="fas fa-school"></i></div>
+                    <h3>Schools & Districts</h3>
+                    <p>Improve outcomes with data-driven decisions.</p>
+                    <a href="#" class="btn-full-lime">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>Teachers and students agree: Pear Deck works</h2>
+            <div class="testi-grid">
+                <div class="testi-card">
+                    <div class="quote-box"><i class="fas fa-quote-left"></i></div>
+                    <p style="margin-bottom:20px; font-style:italic;">"Since using Pear Deck, I have seen a change in my students. They are more engaged, more willing to participate, and are loving being able to share their answers anonymously."</p>
+                    <a href="#" class="testi-link">Read the story -></a>
+                </div>
+                <div class="testi-card">
+                    <div class="quote-box"><i class="fas fa-quote-left"></i></div>
+                    <p style="margin-bottom:20px; font-style:italic;">"Pear Deck allows every student to engage with the lesson in their own way."</p>
+                    <a href="#" class="testi-link">Read the story -></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="container form-container">
+            <div class="form-text">
+                <div style="text-transform:uppercase; font-size:0.8rem; font-weight:700; margin-bottom:10px;">Schools & Districts</div>
+                <h2>Request a demo</h2>
+                <p>Explore premium features and get a personalized walkthrough for your school or district.</p>
+            </div>
+            <div class="form-box" style="background:white; padding:40px; border-radius:16px; border:1px solid #ddd;">
+                <form>
+                    <div class="form-grid">
+                        <div><label class="form-label">First Name*</label><input type="text" class="form-input"></div>
+                        <div><label class="form-label">Last Name*</label><input type="text" class="form-input"></div>
+                    </div>
+                    <div class="form-grid">
+                        <div><label class="form-label">Work Email*</label><input type="email" class="form-input"></div>
+                        <div><label class="form-label">Job Title*</label><input type="text" class="form-input"></div>
+                    </div>
+                    <div style="margin-bottom:20px;">
+                        <label class="form-label">School / District*</label><input type="text" class="form-input">
+                    </div>
+                    <button class="btn btn-yellow">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:20px;">
+                    <i class="fas fa-pear" style="color:var(--pd-lime);"></i> Pear Deck Learning
+                </div>
+                <p style="opacity:0.7; font-size:0.8rem; margin-bottom:15px;">Join our newsletter</p>
+                <div style="display:flex; gap:5px;">
+                    <input type="email" placeholder="Enter your email" style="padding:10px; border-radius:4px; border:none; width:100%;">
+                    <button class="btn btn-lime" style="padding:10px 15px;">Go</button>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Professional Services</a></li>
+                    <li><a href="#">Use Cases</a></li>
+                    <li><a href="#">Efficacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Pear Deck</a></li>
+                    <li><a href="#">Pear Assessment</a></li>
+                    <li><a href="#">Pear Practice</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Services | Pear Deck Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Exact Palette from Screenshot */
+            --pd-dark-navy: #1e2035;
+            --pd-yellow-btn: #fdd835;
+            --pd-lime: #dbe956;       /* Pear Deck Column */
+            --pd-gold: #fcc44d;       /* Pear Practice Column */
+            --pd-green: #208b5e;      /* Pear Assessment Column */
+            
+            /* Light Backgrounds for Table Columns */
+            --bg-lime-light: #f6fce9;
+            --bg-gold-light: #fffdf5;
+            --bg-green-light: #eef7f3;
+
+            --pd-light-blue: #eef8fc;
+            --pd-cream: #fffbf0;
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-gray: #555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-yellow {
+            background-color: var(--pd-yellow-btn);
+            color: var(--pd-dark-navy);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-yellow:hover { background-color: #eecb2f; }
+
+        .btn-lime {
+            background-color: var(--pd-lime);
+            color: var(--pd-dark-navy);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--pd-dark-navy);
+            color: var(--pd-dark-navy);
+            padding: 6px 15px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; color: var(--pd-dark-navy); text-decoration: none; }
+        .logo i { color: var(--pd-lime); font-size: 1.6rem; }
+        
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; font-weight: 600; }
+        
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .student-login { font-size: 0.8rem; text-decoration: underline; color: var(--text-dark); font-weight: 600; }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(to bottom, #ffffff, var(--pd-light-blue));
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: var(--text-dark); font-weight: 700; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: var(--pd-dark-navy); }
+        .hero-text p { font-size: 1.1rem; margin-bottom: 30px; color: var(--text-gray); max-width: 450px; }
+
+        .hero-img-wrapper { position: relative; display: flex; justify-content: center; }
+        
+        /* Background Shapes */
+        .hero-shape-green {
+            position: absolute; top: 20px; left: 0; width: 200px; height: 300px;
+            background-color: #134e4a; border-radius: 10px; z-index: 1;
+        }
+        .hero-shape-blue {
+            position: absolute; top: -20px; right: 0; width: 300px; height: 300px;
+            background-color: #bde0fe; border-radius: 50%; z-index: 1; opacity: 0.5;
+        }
+
+        .hero-photo {
+            position: relative; z-index: 2; width: 300px; height: 350px;
+            background-image: url('https://placehold.co/400x500/8d6e63/ffffff?text=Man+With+Tablet');
+            background-size: cover; border-radius: 150px 150px 0 0; /* Arch shape */
+            border: 4px solid var(--white);
+        }
+
+        /* --- Expert Help Section --- */
+        .expert-section { padding: 80px 0; text-align: center; background: var(--white); }
+        .expert-section h2 { font-size: 2.5rem; color: var(--pd-dark-navy); margin-bottom: 60px; }
+
+        .expert-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
+            text-align: left; max-width: 1140px; margin: 0 auto 50px;
+        }
+
+        .expert-item .icon-box {
+            width: 40px; height: 40px; background: #e0f2fe; color: #0284c7;
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px; font-size: 1.2rem;
+        }
+        .expert-item h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--pd-dark-navy); }
+        .expert-item p { font-size: 0.9rem; color: var(--text-gray); line-height: 1.5; }
+
+        /* --- A La Carte Table Section --- */
+        .pricing-section {
+            background-color: var(--pd-cream);
+            padding: 80px 0;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .pricing-header { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: var(--pd-dark-navy); }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px 0;
+        }
+
+        .pricing-table th {
+            padding: 15px;
+            color: var(--pd-dark-navy);
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* Column Headers */
+        .th-pear-deck { background-color: var(--pd-lime); }
+        .th-pear-practice { background-color: var(--pd-gold); }
+        .th-pear-assessment { background-color: var(--pd-green); color: white !important; }
+
+        .pricing-table td {
+            padding: 20px;
+            border-bottom: 1px solid white;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        /* Row Label Column */
+        .col-label { text-align: left; font-weight: 600; width: 25%; background: white; }
+        
+        /* Data Columns Backgrounds */
+        .col-deck { background-color: var(--bg-lime-light); text-align: center; width: 25%; }
+        .col-prac { background-color: var(--bg-gold-light); text-align: center; width: 25%; }
+        .col-assess { background-color: var(--bg-green-light); text-align: center; width: 25%; }
+
+        .check-icon {
+            width: 24px; height: 24px; border: 2px solid var(--pd-dark-navy);
+            border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; color: var(--pd-dark-navy);
+        }
+
+        .category-row td {
+            font-weight: 800; padding-top: 30px; font-size: 0.8rem; text-transform: uppercase; color: var(--text-gray);
+        }
+
+        /* --- Form Section --- */
+        .form-section {
+            background-color: var(--pd-cream);
+            padding-bottom: 80px;
+        }
+
+        .form-container {
+            max-width: 1000px; margin: 0 auto;
+            display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px;
+        }
+
+        .form-text h2 { font-size: 2.2rem; margin-bottom: 20px; color: var(--pd-dark-navy); }
+        .form-text p { color: var(--text-gray); margin-bottom: 30px; }
+
+        .form-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;
+        }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 30px; /* Rounded inputs */
+            background: white;
+        }
+
+        .checkbox-group { margin-bottom: 20px; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; }
+        
+        /* --- Footer --- */
+        footer { background-color: var(--pd-dark-navy); color: white; padding: 80px 0 30px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { opacity: 0.7; margin-bottom: 20px; font-weight: 500; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: white; opacity: 0.7; text-decoration: none; }
+        .newsletter input { padding: 10px; border-radius: 4px; border: none; margin-right: 5px; }
+
+        @media (max-width: 768px) {
+            .hero-grid, .expert-grid, .form-container, .footer-grid { grid-template-columns: 1fr; }
+            .pricing-table { display: block; overflow-x: auto; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><i class="fas fa-pear"></i> Pear Deck Learning</a>
+                <div class="nav-links">
+                    <a href="#">Solutions <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Products <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Why Pear Deck Learning? <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Resources & Community <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="nav-right">
+                    <a href="#" class="student-login">Student/Tutor log in</a>
+                    <button class="btn-lime btn" style="padding: 6px 16px; font-size:0.8rem;">Sign Up</button>
+                    <button class="btn-outline btn" style="padding: 6px 16px; font-size:0.8rem;">Log In</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h4>Professional Services</h4>
+                <h1>Make the most of your investment from Day One</h1>
+                <p>We make professional services easy with options from virtual workshops to custom training. Make the most of Pear Deck Learning with help from the start.</p>
+                <a href="#" class="btn btn-yellow">Buy services</a>
+            </div>
+            <div class="hero-img-wrapper">
+                <div class="hero-shape-green"></div>
+                <div class="hero-shape-blue"></div>
+                <div class="hero-photo"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="expert-section">
+        <div class="container">
+            <h2>Expert help to create thriving classrooms</h2>
+            <div class="expert-grid">
+                <div class="expert-item">
+                    <div class="icon-box"><i class="fas fa-chalkboard"></i></div>
+                    <h3>On hand help for educators</h3>
+                    <p>Learn about our comprehensive offerings designed to help your educators make the most of our technology.</p>
+                </div>
+                <div class="expert-item">
+                    <div class="icon-box"><i class="fas fa-bolt"></i></div>
+                    <h3>Success from the start</h3>
+                    <p>Ensure that your teachers are ready to use tools with confidence from day one with implementation packages.</p>
+                </div>
+                <div class="expert-item">
+                    <div class="icon-box"><i class="fas fa-home"></i></div>
+                    <h3>One hour spot, right near you</h3>
+                    <p>Flexible virtual options allow your team to access training from the comfort of their own homes.</p>
+                </div>
+                <div class="expert-item">
+                    <div class="icon-box"><i class="fas fa-book-reader"></i></div>
+                    <h3>Just-for-teachers journey</h3>
+                    <p>Our educators are teachers too! Learn from former educators who know what it takes to make tech work.</p>
+                </div>
+            </div>
+            <a href="#" class="btn btn-yellow">Buy packages</a>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-card">
+                <h2 class="pricing-header">À la Carte Options</h2>
+                
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th class="th-pear-deck">Pear Deck</th>
+                            <th class="th-pear-practice">Pear Practice</th>
+                            <th class="th-pear-assessment">Pear Assessment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row"><td colspan="4">Virtual Workshops</td></tr>
+                        <tr>
+                            <td class="col-label">Product Training</td>
+                            <td class="col-deck"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-prac"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-assess"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                        </tr>
+
+                        <tr class="category-row"><td colspan="4">Custom Onsite Services</td></tr>
+                        <tr>
+                            <td class="col-label">Implementation Planning</td>
+                            <td class="col-deck"></td>
+                            <td class="col-prac"></td>
+                            <td class="col-assess"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                        </tr>
+
+                        <tr class="category-row"><td colspan="4">Customer Prescriptives</td></tr>
+                        <tr>
+                            <td class="col-label">Product Training</td>
+                            <td class="col-deck"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-prac"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-assess"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                        </tr>
+                        <tr>
+                            <td class="col-label">Train the Trainer</td>
+                            <td class="col-deck"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-prac"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-assess"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-label">Student Engagement</td>
+                            <td class="col-deck"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-prac"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-assess"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-label">Differentiated Instruction</td>
+                            <td class="col-deck"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-prac"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-assess"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                        </tr>
+                        <tr>
+                            <td class="col-label">Data Driven Instruction</td>
+                            <td class="col-deck"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-prac"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                            <td class="col-assess"><div class="check-icon"><i class="fas fa-check"></i></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="container form-container">
+            <div class="form-text">
+                <div style="font-size:0.8rem; font-weight:bold; text-transform:uppercase; margin-bottom:10px;">School administrators</div>
+                <h2>Get more info</h2>
+                <p>Learn how your school and district can benefit from our professional services offerings by speaking with a member of our team.</p>
+            </div>
+            <div class="form-box">
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>First Name*</label>
+                            <input type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name*</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>School Email*</label>
+                            <input type="email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number*</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <label>School/District*</label>
+                        <input type="text">
+                    </div>
+                    
+                    <div style="font-size:0.8rem; font-weight:600; margin-bottom:10px;">Which products are you interested in learning more about? *</div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-label"><input type="checkbox"> Pear Deck</div>
+                        <div class="checkbox-label"><input type="checkbox"> Pear Assessment</div>
+                        <div class="checkbox-label"><input type="checkbox"> Pear Practice</div>
+                        <div class="checkbox-label"><input type="checkbox"> Pear Deck Tutor</div>
+                        <div class="checkbox-label"><input type="checkbox"> All products</div>
+                        <div class="checkbox-label"><input type="checkbox"> Other</div>
+                    </div>
+
+                    <p style="font-size:0.75rem; color:#777; margin-bottom:20px;">
+                        By submitting this form, I confirm that I am 18 years of age or older and wish to receive marketing communications from Pear Deck Learning. I understand I can unsubscribe at any time.
+                    </p>
+
+                    <button class="btn btn-yellow">Contact us</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="color:white; margin-bottom:20px;"><i class="fas fa-pear" style="color:var(--pd-lime);"></i> Pear Deck Learning</a>
+                <p style="opacity:0.7; font-size:0.8rem; margin-bottom:15px;">Join our newsletter</p>
+                <div style="display:flex; gap:5px;">
+                    <input type="email" placeholder="Enter your email" style="padding:10px; border-radius:4px; border:none; width:100%;">
+                    <button class="btn btn-lime" style="padding:10px 15px;">Go</button>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Professional Services</a></li>
+                    <li><a href="#">Use Cases</a></li>
+                    <li><a href="#">Efficacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Pear Start</a></li>
+                    <li><a href="#">Pear Deck</a></li>
+                    <li><a href="#">Pear Practice</a></li>
+                    <li><a href="#">Pear Assessment</a></li>
+                    <li><a href="#">Pear Deck Tutor</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" style="text-align:center; margin-top:40px; font-size:0.8rem; opacity:0.6;">
+            © 2025 Pear Deck Learning. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

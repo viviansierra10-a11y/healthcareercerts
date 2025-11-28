@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficacy | Pear Deck Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette extracted from screenshot */
+            --pd-maroon: #3d0c02;       /* Hero Background */
+            --pd-orange: #e65526;       /* Hero Graphic */
+            --pd-lime: #dbe956;         /* Buttons/Accents */
+            --pd-lime-hover: #cddb4d;
+            --pd-cream: #fcfbf7;        /* Page Background */
+            --pd-yellow: #fdd835;       /* Icons/Buttons */
+            --pd-light-blue: #eef8fc;   /* Expectations Section */
+            --pd-footer: #1e2035;
+            --pd-text-dark: #1a1a1a;
+            --pd-gray: #555;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--pd-cream);
+            color: var(--pd-text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-lime {
+            background-color: var(--pd-lime);
+            color: var(--pd-text-dark);
+            border: 2px solid var(--pd-lime);
+        }
+        .btn-lime:hover { background-color: var(--pd-lime-hover); border-color: var(--pd-lime-hover); }
+
+        .btn-yellow {
+            background-color: var(--pd-yellow);
+            color: var(--pd-text-dark);
+            border: 2px solid var(--pd-yellow);
+        }
+        .btn-yellow:hover { transform: translateY(-2px); }
+
+        .btn-outline-dark {
+            background: transparent;
+            border: 2px solid var(--pd-text-dark);
+            color: var(--pd-text-dark);
+        }
+        .btn-outline-dark:hover { background: rgba(0,0,0,0.05); }
+
+        .btn-outline-white {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+        .btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+
+        /* Header Buttons */
+        .btn-header-lime { background: var(--pd-lime); padding: 6px 16px; font-size: 0.8rem; color: var(--pd-text-dark); border: none; }
+        .btn-header-outline { background: white; border: 1px solid var(--pd-text-dark); padding: 6px 16px; font-size: 0.8rem; color: var(--pd-text-dark); }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; color: var(--pd-text-dark); text-decoration: none; }
+        .logo i { color: var(--pd-lime); font-size: 1.6rem; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--pd-text-dark); font-size: 0.85rem; font-weight: 600; }
+        .nav-right { display: flex; align-items: center; gap: 10px; }
+        .student-login { font-size: 0.8rem; text-decoration: underline; color: var(--pd-text-dark); font-weight: 600; }
+
+        /* --- Hero Section --- */
+        .hero {
+            background-color: var(--pd-maroon);
+            color: white;
+            padding: 100px 0 250px; /* Extra padding at bottom for overlap */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-graphic {
+            position: absolute;
+            top: 20px;
+            right: -50px;
+            width: 500px;
+            height: 500px;
+            background-color: var(--pd-orange);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        /* Pear silhouette placeholder inside graphic */
+        .hero-graphic::after {
+            content: '';
+            position: absolute;
+            top: 100px; left: 100px;
+            width: 200px; height: 250px;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 50% 50% 60% 60%;
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 600px; }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero-content p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
+
+        /* --- Logic Model Card --- */
+        .logic-model-section {
+            margin-top: -180px; /* Overlap Hero */
+            position: relative;
+            z-index: 3;
+            margin-bottom: 80px;
+        }
+
+        .logic-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .logic-header {
+            display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 50px;
+        }
+        .logic-header h2 { font-size: 2.5rem; color: var(--pd-text-dark); max-width: 500px; }
+        .logic-header p { max-width: 600px; color: var(--pd-gray); margin-top: 10px; }
+
+        .model-steps {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-bottom: 40px;
+        }
+        .step-item h4 { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; margin-bottom: 10px; }
+        .step-num { 
+            width: 24px; height: 24px; background: var(--pd-yellow); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;
+        }
+        .step-item p { font-size: 0.9rem; color: var(--pd-gray); }
+
+        .logic-diagram {
+            width: 100%;
+            background-color: #eef8fc;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        .logic-diagram img { width: 100%; display: block; }
+
+        /* --- Tabs Section --- */
+        .tabs-section { padding: 60px 0; text-align: center; background-color: var(--pd-cream); }
+        .tabs-section h3 { font-size: 1.8rem; margin-bottom: 40px; color: var(--pd-text-dark); }
+
+        .tabs-nav {
+            display: flex; justify-content: center; gap: 40px; border-bottom: 2px solid #e0e0e0;
+            max-width: 800px; margin: 0 auto 60px;
+        }
+        .tab-item {
+            padding: 15px 20px; cursor: pointer; font-weight: 700; color: #999; position: relative;
+        }
+        .tab-item.active { color: var(--pd-text-dark); }
+        .tab-item.active::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 4px; background: var(--pd-lime);
+        }
+
+        /* --- Science Behind Section --- */
+        .science-section { padding-bottom: 80px; text-align: center; }
+        .science-header { max-width: 800px; margin: 0 auto 40px; }
+        .science-header h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--pd-text-dark); }
+        .science-header p { color: var(--pd-gray); margin-bottom: 30px; }
+        
+        .science-btns { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
+
+        /* --- Expectations (Blue Grid) --- */
+        .expect-section {
+            background-color: var(--pd-light-blue);
+            padding: 100px 0;
+            text-align: center;
+        }
+        .expect-section h2 { font-size: 2.2rem; margin-bottom: 60px; }
+
+        .expect-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+        }
+        .expect-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: left;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .expect-icon {
+            width: 40px; height: 40px; background: var(--pd-yellow); border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .expect-content h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .expect-content p { font-size: 0.9rem; color: var(--pd-gray); }
+
+        /* --- Ecosystem CTA (Bottom) --- */
+        .ecosystem-section {
+            background-color: var(--pd-yellow);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Abstract shapes */
+        .eco-shape-left {
+            position: absolute; bottom: -50px; left: -50px; width: 300px; height: 300px;
+            background: #e65526; border-radius: 50%;
+        }
+        .eco-shape-right {
+            position: absolute; bottom: -50px; right: -50px; width: 300px; height: 300px;
+            background: #e65526; border-radius: 50% 0 0 0;
+        }
+
+        .ecosystem-content { position: relative; z-index: 2; }
+        .ecosystem-content h2 { font-size: 2.5rem; margin-bottom: 15px; color: var(--pd-text-dark); }
+        .ecosystem-content p { margin-bottom: 30px; font-weight: 600; }
+
+        /* --- Footer --- */
+        footer { background-color: var(--pd-footer); color: white; padding: 80px 0 30px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { opacity: 0.7; margin-bottom: 20px; font-weight: 500; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a { color: white; opacity: 0.7; text-decoration: none; }
+        .newsletter input { padding: 10px; border-radius: 4px; border: none; margin-right: 5px; width: 60%; }
+
+        @media (max-width: 992px) {
+            .hero-graphic { display: none; }
+            .model-steps, .expect-grid, .footer-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .tabs-nav { overflow-x: auto; justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-pear"></i> Pear Deck Learning
+                </a>
+                <div class="nav-links">
+                    <a href="#">Solutions</a>
+                    <a href="#">Products</a>
+                    <a href="#">Why Pear Deck Learning?</a>
+                    <a href="#">Resources & Community</a>
+                    <a href="#">Pricing</a>
+                </div>
+                <div class="nav-right">
+                    <a href="#" class="student-login">Student/Tutor log in</a>
+                    <button class="btn-header-lime">Sign Up</button>
+                    <button class="btn-header-outline">Log In</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-graphic"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Successful learning starts with science-based solutions</h1>
+                <p>Research suggests that engaging students in their learning leads to better academic outcomes. Our products help you put this research into action in your classroom.</p>
+                <p style="font-size:0.9rem;">Turn lessons into active learning experiences that ensure student success levels — and foster deeper engagement.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="logic-model-section">
+        <div class="container">
+            <div class="logic-card">
+                <div class="logic-header">
+                    <div>
+                        <h2>Understanding the Pear Deck Learning logic model</h2>
+                        <p>Creating a model that connects the properties of Pear Deck Learning products with short-term and long-term outcomes allows us to hypothesize how a learning ecosystem works in practice.</p>
+                    </div>
+                    <a href="#" class="btn btn-lime">Download Logic Model PDF</a>
+                </div>
+
+                <div class="model-steps">
+                    <div class="step-item">
+                        <h4><span class="step-num">A</span> Inputs</h4>
+                        <p>Materials and resources required to implement the program.</p>
+                    </div>
+                    <div class="step-item">
+                        <h4><span class="step-num">B</span> Activities</h4>
+                        <p>Actions taken by teachers and students during the learning process.</p>
+                    </div>
+                    <div class="step-item">
+                        <h4><span class="step-num">C</span> Outcomes</h4>
+                        <p>Measurable changes in learning, behavior, or conditions.</p>
+                    </div>
+                </div>
+
+                <div class="logic-diagram">
+                    <img src="https://placehold.co/1000x600/1a3c34/ffffff?text=Detailed+Logic+Model+Diagram" alt="Logic Model Diagram">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tabs-section">
+        <div class="container">
+            <h3>View the logic models for each product:</h3>
+            <div class="tabs-nav">
+                <div class="tab-item active">Pear Assessment</div>
+                <div class="tab-item">Pear Deck</div>
+                <div class="tab-item">Pear Practice</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="science-section">
+        <div class="container">
+            <div class="science-header">
+                <h2>The science behind Pear Assessment</h2>
+                <p>Pear Assessment (formerly Edulastic) allows educators to track student progress and respond to needs in real time. It's built on the principles of formative assessment.</p>
+            </div>
+            <div class="science-btns">
+                <a href="#" class="btn btn-yellow">Download PDF</a>
+                <a href="#" class="btn btn-outline-dark">Go to the research</a>
+            </div>
+            
+            <div class="logic-diagram">
+                <img src="https://placehold.co/1000x500/eef8fc/1a3c34?text=Assessment+Logic+Model" alt="Assessment Logic Model">
+            </div>
+        </div>
+    </section>
+
+    <section class="expect-section">
+        <div class="container">
+            <h6 style="text-transform:uppercase; font-size:0.8rem; font-weight:bold; margin-bottom:10px;">Outcomes</h6>
+            <h2>Here's what to expect with Pear Assessment</h2>
+            
+            <div class="expect-grid">
+                <div class="expect-card">
+                    <div class="expect-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="expect-content">
+                        <h4>Data-driven decisions</h4>
+                        <p>Enable educators to adjust instruction based on real-time evidence of student learning.</p>
+                    </div>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon"><i class="fas fa-smile"></i></div>
+                    <div class="expect-content">
+                        <h4>Personalized learning paths</h4>
+                        <p>Assign targeted practice or enrichment activities based on individual student needs.</p>
+                    </div>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="expect-content">
+                        <h4>Clear learning goals</h4>
+                        <p>Align assessments with standards to ensure students are meeting benchmarks.</p>
+                    </div>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="expect-content">
+                        <h4>More confident students</h4>
+                        <p>Regular feedback helps students understand their progress and take ownership of learning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ecosystem-section">
+        <div class="eco-shape-left"></div>
+        <div class="eco-shape-right"></div>
+        <div class="container ecosystem-content">
+            <h2>The Pear Deck Learning ecosystem</h2>
+            <p>See how our products work together to support educators and students.</p>
+            <a href="#" class="btn btn-outline-white" style="border-color:#1a1a1a; color:#1a1a1a;">Explore All Products</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color:white; margin-bottom:20px;">
+                    <i class="fas fa-pear" style="color:var(--pd-lime);"></i> Pear Deck Learning
+                </div>
+                <p style="opacity:0.7; font-size:0.8rem; margin-bottom:15px;">Join our newsletter</p>
+                <div style="display:flex; gap:5px;">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button class="btn-lime" style="padding:10px 15px;">Go</button>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#">Professional Services</a></li>
+                    <li><a href="#">Use Cases</a></li>
+                    <li><a href="#">Efficacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Pear Deck</a></li>
+                    <li><a href="#">Pear Assessment</a></li>
+                    <li><a href="#">Pear Practice</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container" style="text-align:center; margin-top:40px; font-size:0.8rem; opacity:0.6;">
+            © 2025 Pear Deck Learning. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
