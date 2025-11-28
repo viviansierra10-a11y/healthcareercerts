@@ -1,0 +1,13 @@
+{
+  "name": "pear-deck-site",
+  "version": "1.0.0",
+  "description": "Pear Deck Learning Website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
