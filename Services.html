@@ -9,27 +9,30 @@
     
     <style>
         :root {
-            /* Custom Color Palette */
-            --pd-dark-blue: #3D457D;
-            --pd-medium-blue: #8694C6;
-            --pd-gray: #ACB2B2;
-            --pd-slate-blue: #7D85A3;
-            --pd-royal-blue: #284CA0;
+            /* New Color Palette */
+            --french-blue: #3D457D;
+            --wisteria-blue: #8694C6;
+            --taupe: #B6A69F;
+            --burnt-orange: #D67C42;
+            --cream: #FFFDD0;
+            --green-accent: #009966;
+            --gold-accent: #C9A227;
+            --charcoal: #36454F;
 
-            /* Applied Colors - Different distribution from home page */
-            --pd-dark-navy: #284CA0;
-            --pd-yellow-btn: #8694C6;
-            --pd-lime: #7D85A3;
-            --pd-gold: #ACB2B2;
-            --pd-green: #3D457D;
+            /* Applied Colors - Services Page Distribution */
+            --pd-dark-navy: #3D457D;
+            --pd-yellow-btn: #009966;
+            --pd-lime: #8694C6;
+            --pd-gold: #B6A69F;
+            --pd-green: #36454F;
 
             /* Light Backgrounds for Table Columns */
-            --bg-lime-light: #f0f2f7;
-            --bg-gold-light: #f5f6f8;
-            --bg-green-light: #e8eaf2;
+            --bg-lime-light: #f0f3f8;
+            --bg-gold-light: #f5f3f1;
+            --bg-green-light: #e8ebed;
 
-            --pd-light-blue: #f0f2f7;
-            --pd-cream: #fafbfc;
+            --pd-light-blue: #f8f9fb;
+            --pd-cream: #FFFDD0;
             --white: #ffffff;
             --text-dark: #1a1a1a;
             --text-gray: #555;
@@ -130,11 +133,11 @@
         /* Background Shapes */
         .hero-shape-green {
             position: absolute; top: 20px; left: 0; width: 200px; height: 300px;
-            background-color: #3D457D; border-radius: 10px; z-index: 1;
+            background-color: var(--green-accent); border-radius: 10px; z-index: 1;
         }
         .hero-shape-blue {
             position: absolute; top: -20px; right: 0; width: 300px; height: 300px;
-            background-color: #8694C6; border-radius: 50%; z-index: 1; opacity: 0.3;
+            background-color: var(--wisteria-blue); border-radius: 50%; z-index: 1; opacity: 0.3;
         }
 
         .hero-photo {
@@ -154,7 +157,7 @@
         }
 
         .expert-item .icon-box {
-            width: 40px; height: 40px; background: #f0f2f7; color: #284CA0;
+            width: 40px; height: 40px; background: var(--cream); color: var(--green-accent);
             border-radius: 8px; display: flex; align-items: center; justify-content: center;
             margin-bottom: 20px; font-size: 1.2rem;
         }
