@@ -3,21 +3,23 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from public directory
+// Serve static assets (images, css, js) from 'public'
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
-// Serve static files from root
-app.use(express.static(__dirname));
 
 // Route for root path
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'PDHomePage.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Route for all HTML files
-app.get('/*.html', (req, res) => {
-  const filePath = path.join(__dirname, req.path);
-  res.sendFile(filePath);
+// Allow access to specific HTML files only
+app.get('/:page', (req, res) => {
+  const page = req.params.page;
+  // Simple validation to ensure they only request .html files
+  if (page.match(/^[a-zA-Z0-9-]+\.html$/)) {
+    res.sendFile(path.join(__dirname, page));
+  } else {
+    res.status(404).send('Not found');
+  }
 });
 
 const server = app.listen(PORT, () => {
