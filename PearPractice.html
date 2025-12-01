@@ -9,27 +9,32 @@
     
     <style>
         :root {
-            /* New Color Palette */
+            /* Primary Colors */
             --french-blue: #3D457D;
             --wisteria-blue: #8694C6;
             --taupe: #B6A69F;
             --burnt-orange: #D67C42;
             --cream: #FFFDD0;
+
+            /* Subtle Accents */
             --green-accent: #009966;
             --gold-accent: #C9A227;
             --charcoal: #36454F;
 
-            /* Applied Colors - Practice Page Distribution */
-            --pd-yellow-bg: #C9A227;
-            --pd-lime: #D67C42;
+            /* Text & Base */
+            --text-black: #000000;
+            --white: #ffffff;
+
+            /* Practice Page Distribution - Burnt Orange & Wisteria Blue focus */
+            --pd-yellow-bg: #D67C42;
+            --pd-lime: #8694C6;
             --pd-lime-hover: #B6A69F;
             --pd-orange: #D67C42;
             --pd-dark-green: #3D457D;
             --pd-cream: #fefdfb;
             --pd-footer: #36454F;
-            --pd-text: #1a1a1a;
-            --pd-gray: #555;
-            --white: #ffffff;
+            --pd-text: #000000;
+            --pd-gray: #000000;
         }
 
         * {
@@ -77,7 +82,7 @@
 
         .btn-lime {
             background-color: var(--pd-lime);
-            color: var(--pd-dark-green);
+            color: var(--text-black);
             border: 2px solid var(--pd-lime);
         }
         .btn-lime:hover { background-color: var(--pd-lime-hover); border-color: var(--pd-lime-hover); }
@@ -91,7 +96,7 @@
 
         /* Header Buttons */
         .btn-header-lime {
-            background-color: var(--pd-lime); color: var(--pd-dark-green); 
+            background-color: var(--pd-lime); color: var(--text-black);
             padding: 6px 16px; font-size: 0.8rem; border: none;
         }
         .btn-header-outline {

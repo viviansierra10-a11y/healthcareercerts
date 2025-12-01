@@ -9,17 +9,23 @@
     
     <style>
         :root {
-            /* New Color Palette */
+            /* Primary Colors */
             --french-blue: #3D457D;
             --wisteria-blue: #8694C6;
             --taupe: #B6A69F;
             --burnt-orange: #D67C42;
             --cream: #FFFDD0;
+
+            /* Subtle Accents */
             --green-accent: #009966;
             --gold-accent: #C9A227;
             --charcoal: #36454F;
 
-            /* Applied Colors - Product Page Distribution */
+            /* Text & Base */
+            --text-black: #000000;
+            --white: #ffffff;
+
+            /* Product Page Distribution - Cream & Burnt Orange focus */
             --pd-hero-bg: #FFFDD0;
             --pd-dark-green: #36454F;
             --pd-lime: #C9A227;
@@ -28,9 +34,8 @@
             --pd-cream: #fefdfb;
             --pd-light-blue: #f8f9fb;
             --pd-footer: #3D457D;
-            --pd-text-dark: #1a1a1a;
-            --pd-gray: #555;
-            --white: #ffffff;
+            --pd-text-dark: #000000;
+            --pd-gray: #000000;
 
             /* Feature Colors */
             --blob-blue: #8694C6;
@@ -78,14 +83,14 @@
 
         .btn-lime {
             background-color: var(--pd-lime);
-            color: var(--pd-dark-green);
+            color: var(--text-black);
             border: 2px solid var(--pd-lime);
         }
         .btn-lime:hover { background-color: var(--pd-lime-hover); border-color: var(--pd-lime-hover); }
 
         .btn-yellow {
             background-color: var(--pd-yellow);
-            color: var(--pd-dark-green);
+            color: var(--text-black);
             border: 2px solid var(--pd-text-dark);
         }
         .btn-yellow:hover { transform: translateY(-2px); }

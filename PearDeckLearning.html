@@ -9,27 +9,32 @@
     
     <style>
         :root {
-            /* New Color Palette */
+            /* Primary Colors */
             --french-blue: #3D457D;
             --wisteria-blue: #8694C6;
             --taupe: #B6A69F;
             --burnt-orange: #D67C42;
             --cream: #FFFDD0;
+
+            /* Subtle Accents */
             --green-accent: #009966;
             --gold-accent: #C9A227;
             --charcoal: #36454F;
 
-            /* Applied Colors - Learning Page Distribution */
-            --pd-navy: #36454F;
-            --pd-lime: #009966;
-            --pd-lime-hover: #008855;
+            /* Text & Base */
+            --text-black: #000000;
+            --white: #ffffff;
+
+            /* Learning Page Distribution - Taupe & French Blue focus */
+            --pd-navy: #3D457D;
+            --pd-lime: #B6A69F;
+            --pd-lime-hover: #8694C6;
             --pd-pale-lime: #FFFDD0;
             --pd-light-blue: #f0f3f8;
             --pd-pear-green: #009966;
-            --pd-text-dark: #1a1a1a;
-            --pd-gray: #555;
+            --pd-text-dark: #000000;
+            --pd-gray: #000000;
             --pd-link-blue: #3D457D;
-            --white: #ffffff;
         }
 
         * {
@@ -69,7 +74,7 @@
 
         .btn-lime {
             background-color: var(--pd-lime);
-            color: var(--pd-navy);
+            color: var(--text-black);
             border: 2px solid var(--pd-lime);
         }
         .btn-lime:hover { background-color: var(--pd-lime-hover); border-color: var(--pd-lime-hover); }
@@ -79,7 +84,7 @@
             background: transparent; padding: 6px 16px; font-size: 0.8rem; color: var(--pd-text-dark);
         }
         .btn-signup {
-            background-color: var(--pd-lime); color: var(--pd-text-dark); padding: 6px 16px; font-size: 0.8rem; border: none;
+            background-color: var(--pd-lime); color: var(--text-black); padding: 6px 16px; font-size: 0.8rem; border: none;
         }
 
         /* --- Header --- */
