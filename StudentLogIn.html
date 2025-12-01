@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Pear Start</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-cream: #fffff7; /* Very light cream/off-white */
+            --text-dark: #1e2035;
+            --text-gray: #666;
+            --border-color: #b0b0b0; /* Slightly brownish gray border */
+            --pd-lime: #dbe956;
+            --link-color: #555;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Logo Section --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        /* Mimicking the Pear Icon with CSS/Icon */
+        .pear-icon {
+            font-size: 1.8rem;
+            color: var(--pd-lime);
+            /* Adding a dark outline to mimic the logo style */
+            -webkit-text-stroke: 1px #1a3c34;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a3c34; /* Dark Green/Black */
+        }
+
+        /* --- Login Card --- */
+        .login-card {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 50px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01); /* Very subtle shadow */
+        }
+
+        .login-card h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a3c34;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* --- Sign In Button --- */
+        .btn-signin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .btn-signin:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Small pear icon inside button */
+        .btn-icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--pd-lime);
+            -webkit-text-stroke: 1px #1a3c34;
+            /* Positioning it slightly to look like the image */
+            position: absolute;
+            left: 40px; 
+        }
+
+        /* --- Footer inside Card --- */
+        .divider {
+            height: 1px;
+            background-color: #ccc;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .legal-text {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .legal-text a {
+            color: #666;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        /* --- Bottom Text --- */
+        .early-access {
+            margin-top: 40px;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .early-access strong {
+            color: #1a3c34;
+            font-weight: 700;
+        }
+
+        /* Media Query for Mobile */
+        @media (max-width: 600px) {
+            .login-card {
+                width: 90%;
+                padding: 30px;
+            }
+            .btn-icon {
+                position: static;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <i class="fas fa-lemon pear-icon" style="transform: rotate(-20deg);"></i>
+        <div class="logo-text">Pear Start</div>
+    </div>
+
+    <div class="login-card">
+        <h1>Login</h1>
+        <p class="subtitle">Please login with your Pear Deck Learning account.</p>
+
+        <a href="#" class="btn-signin">
+            <i class="fas fa-lemon btn-icon" style="transform: rotate(-20deg);"></i>
+            Sign in with Pear Deck Learning
+        </a>
+
+        <div class="divider"></div>
+
+        <p class="legal-text">
+            By logging in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+        </p>
+    </div>
+
+    <p class="early-access">
+        Pear Start is currently in <strong>Early Access</strong>.
+    </p>
+
+</body>
+</html>
