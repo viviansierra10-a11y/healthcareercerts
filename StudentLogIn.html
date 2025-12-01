@@ -27,11 +27,42 @@
         body {
             background-color: var(--bg-cream);
             color: var(--text-dark);
-            height: 100vh;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Header with Logo --- */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            z-index: 10;
+        }
+
+        .header-logo {
+            display: inline-block;
+        }
+
+        .header-logo img {
+            height: 60px;
+            transition: opacity 0.2s;
+        }
+
+        .header-logo:hover img {
+            opacity: 0.8;
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 40px 20px;
         }
 
         /* --- Logo Section --- */
@@ -152,6 +183,12 @@
 
         /* Media Query for Mobile */
         @media (max-width: 600px) {
+            header {
+                padding: 15px 20px;
+            }
+            .header-logo img {
+                height: 50px;
+            }
             .login-card {
                 width: 90%;
                 padding: 30px;
@@ -165,7 +202,14 @@
 </head>
 <body>
 
-    <div class="logo-container">
+    <header>
+        <a href="PDHomePage.html" class="header-logo">
+            <img src="public/HCC Logo.png" alt="HealthCareer CERTS">
+        </a>
+    </header>
+
+    <div class="main-content">
+        <div class="logo-container">
         <i class="fas fa-lemon pear-icon" style="transform: rotate(-20deg);"></i>
         <div class="logo-text">Pear Start</div>
     </div>
@@ -186,9 +230,10 @@
         </p>
     </div>
 
-    <p class="early-access">
-        Pear Start is currently in <strong>Early Access</strong>.
-    </p>
+        <p class="early-access">
+            Pear Start is currently in <strong>Early Access</strong>.
+        </p>
+    </div>
 
 </body>
 </html>
